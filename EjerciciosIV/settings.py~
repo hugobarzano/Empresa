@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +26,7 @@ SECRET_KEY = 'a8p#vbhc&s#yn0+$1$mub))1ur9dp_r*r08-#nt1nphvwn9qsm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -82,23 +83,31 @@ WSGI_APPLICATION = 'EjerciciosIV.wsgi.application'
   #      'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
    # }
 #}
-DATABASES = {
-  	
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-    #'heroku': {
-     #   'ENGINE': 'django.db.backends.postgresql_psycopg2',
-     #   'NAME': 'd1ea7k9gsqu3j1',
-      #  'USER': 'xfkguxxjdcmgrp',
-       # 'PASSWORD': 'cqk8UhZfqmBKystbg39wVZDWyB',
-        #'HOST': 'ec2-54-204-6-113.compute-1.amazonaws.com',
-        #'PORT': '5432',
-    #},
-     
-}
+ON_HEROKU = os.environ.get('ON_HEROKU')
+HEROKU_SERVER = os.environ.get('HEROKU_SERVER')
 
+if ON_HEROKU:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',
+			'NAME': 'postgresql',
+		}
+	}
+	DATABASE_URL='postgres://xfkguxxjdcmgrp:cqk8UhZfqmBKystbg39wVZDWyB@ec2-54-204-6-113.compute-1.amazonaws.com:5432/d1ea7k9gsqu3j1'
+else:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.sqlite3',
+			'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+			'USER': '',
+			'PASSWORD': '',
+			'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+			'PORT': '',  
+		}
+	}
+	DATABASE_URL = 'sqlite://'+os.path.join(BASE_DIR,'db.sqlite3')
+
+DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -134,8 +143,7 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 STATIC_URL = '/static/'
 
 
-import dj_database_url
-DATABASE_URL='postgres://xfkguxxjdcmgrp:cqk8UhZfqmBKystbg39wVZDWyB@ec2-54-204-6-113.compute-1.amazonaws.com:5432/d1ea7k9gsqu3j1'
-DATABASES['default'] =  dj_database_url.config()
+
+
 
 
