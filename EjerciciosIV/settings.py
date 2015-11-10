@@ -83,14 +83,20 @@ WSGI_APPLICATION = 'EjerciciosIV.wsgi.application'
    # }
 #}
 DATABASES = {
+  	
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd1ea7k9gsqu3j1',
-        'USER': 'xfkguxxjdcmgrp',
-        'PASSWORD': 'cqk8UhZfqmBKystbg39wVZDWyB',
-        'HOST': 'ec2-54-204-6-113.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    #'heroku': {
+     #   'ENGINE': 'django.db.backends.postgresql_psycopg2',
+     #   'NAME': 'd1ea7k9gsqu3j1',
+      #  'USER': 'xfkguxxjdcmgrp',
+       # 'PASSWORD': 'cqk8UhZfqmBKystbg39wVZDWyB',
+        #'HOST': 'ec2-54-204-6-113.compute-1.amazonaws.com',
+        #'PORT': '5432',
+    #},
+     
 }
 
 
@@ -126,5 +132,9 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 STATIC_URL = '/static/'
+
+
+import dj_database_url
+#DATABASES['default'] =  dj_database_url.config()
 
 
