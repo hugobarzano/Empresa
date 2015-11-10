@@ -83,8 +83,8 @@ WSGI_APPLICATION = 'EjerciciosIV.wsgi.application'
   #      'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
    # }
 #}
-ON_HEROKU = os.environ.get('ON_HEROKU')
-HEROKU_SERVER = os.environ.get('HEROKU_SERVER')
+ON_HEROKU = os.environ.get('PORT')
+
 
 if ON_HEROKU:
 	DATABASES = {
