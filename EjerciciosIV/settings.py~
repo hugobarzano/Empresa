@@ -87,6 +87,7 @@ ON_HEROKU = os.environ.get('PORT')
 
 
 if ON_HEROKU:
+	print 'Estoy en heroku'
 	DATABASES = {
 		'default': {
 			'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -99,6 +100,7 @@ if ON_HEROKU:
 	}
 	#DATABASE_URL='postgres://xfkguxxjdcmgrp:cqk8UhZfqmBKystbg39wVZDWyB@ec2-54-204-6-113.compute-1.amazonaws.com:5432/d1ea7k9gsqu3j1'
 else:
+	print 'Estoy en local'
 	DATABASES = {
 		'default': {
 			'ENGINE': 'django.db.backends.sqlite3',
