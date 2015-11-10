@@ -97,7 +97,7 @@ if ON_HEROKU:
 			'PORT': '5432'
 		}
 	}
-	DATABASE_URL='postgres://xfkguxxjdcmgrp:cqk8UhZfqmBKystbg39wVZDWyB@ec2-54-204-6-113.compute-1.amazonaws.com:5432/d1ea7k9gsqu3j1'
+	#DATABASE_URL='postgres://xfkguxxjdcmgrp:cqk8UhZfqmBKystbg39wVZDWyB@ec2-54-204-6-113.compute-1.amazonaws.com:5432/d1ea7k9gsqu3j1'
 else:
 	DATABASES = {
 		'default': {
@@ -131,10 +131,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-
-STATIC_URL = '/static/'
-
-## Heroku settings for static files
 
 STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (
