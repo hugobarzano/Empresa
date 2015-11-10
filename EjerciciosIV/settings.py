@@ -107,7 +107,8 @@ else:
 	}
 	#DATABASE_URL = 'sqlite://'+os.path.join(BASE_DIR,'db.sqlite3')
 
-DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
+if ON_HEROKU:
+	DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
