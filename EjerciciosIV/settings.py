@@ -99,8 +99,8 @@ DATABASES = {
     }
 }
 ON_HEROKU = os.environ.get('PORT')
-DATABASE_URL='postgres://xfkguxxjdcmgrp:cqk8UhZfqmBKystbg39wVZDWyB@ec2-54-204-6-113.compute-1.amazonaws.com:5432/d1ea7k9gsqu3j1'
 if ON_HEROKU:
+	DATABASE_URL='postgres://xfkguxxjdcmgrp:cqk8UhZfqmBKystbg39wVZDWyB@ec2-54-204-6-113.compute-1.amazonaws.com:5432/d1ea7k9gsqu3j1'
 	DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
