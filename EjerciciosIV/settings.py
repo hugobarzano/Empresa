@@ -11,10 +11,19 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 import os
+
 import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +35,13 @@ SECRET_KEY = 'a8p#vbhc&s#yn0+$1$mub))1ur9dp_r*r08-#nt1nphvwn9qsm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+# Allow all host headers
 ALLOWED_HOSTS = ['*']
+
+
+
+
 
 
 # Application definition
@@ -58,7 +73,7 @@ ROOT_URLCONF = 'EjerciciosIV.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,42 +92,13 @@ WSGI_APPLICATION = 'EjerciciosIV.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
- #       'ENGINE': 'django.db.backends.sqlite3',
-  #      'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-   # }
-#}
-ON_HEROKU = os.environ.get('PORT')
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
-
-if ON_HEROKU:
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.postgresql_psycopg2',
-			'NAME': 'd1ea7k9gsqu3j1',
-			'USER': 'xfkguxxjdcmgrp',
-			'PASSWORD': 'cqk8UhZfqmBKystbg39wVZDWyB',
-			'HOST': 'ec2-54-204-6-113.compute-1.amazonaws.com',    
-			'PORT': '5432'
-		}
-	}
-	#DATABASE_URL='postgres://xfkguxxjdcmgrp:cqk8UhZfqmBKystbg39wVZDWyB@ec2-54-204-6-113.compute-1.amazonaws.com:5432/d1ea7k9gsqu3j1'
-else:
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.sqlite3',
-			'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-			'USER': '',
-			'PASSWORD': '',
-			'HOST': '',                      
-			'PORT': '',  
-		}
-	}
-	#DATABASE_URL = 'sqlite://'+os.path.join(BASE_DIR,'db.sqlite3')
-
-if ON_HEROKU:
-	DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -131,20 +117,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+#STATIC_URL = '/static/'
 
 STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-STATIC_URL = '/static/'
-
-
-
-
-
-
