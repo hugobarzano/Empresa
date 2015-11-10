@@ -91,6 +91,10 @@ if ON_HEROKU:
 		'default': {
 			'ENGINE': 'django.db.backends.postgresql_psycopg2',
 			'NAME': 'd1ea7k9gsqu3j1',
+			'USER': 'xfkguxxjdcmgrp',
+			'PASSWORD': 'cqk8UhZfqmBKystbg39wVZDWyB',
+			'HOST': 'ec2-54-204-6-113.compute-1.amazonaws.com',    
+			'PORT': '5432'
 		}
 	}
 	DATABASE_URL='postgres://xfkguxxjdcmgrp:cqk8UhZfqmBKystbg39wVZDWyB@ec2-54-204-6-113.compute-1.amazonaws.com:5432/d1ea7k9gsqu3j1'
