@@ -56,7 +56,7 @@ class RutasTests(APITestCase):
 	def test_actualiza_empresa(self):
 		emp = Empresa(nombre='empresa1',correo='correo1')
 		emp.save()
-        	#emp2 = Empresa.objects.get(pk='empresa1')
+        	emp2 = Empresa.objects.get(pk='empresa1')
 		#self.assertEqual(emp2.nombre,'empresa1')
 
 		#resp = self.client.post(reverse('Empresas', kwargs={'nombre': 'empresa1'}), {'correo': 'correo_actualizado'})
