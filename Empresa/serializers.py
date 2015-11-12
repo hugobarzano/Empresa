@@ -18,5 +18,7 @@ class EmpresaSerializer(serializers.Serializer):
 	        """
 		instance.nombre = validated_data.get('nombre', instance.nombre)
 		instance.correo = validated_data.get('correo', instance.correo)
+		#instance.nombre = validated_data.nombre
+		#instance.correo = validated_data.correo
 		instance.save()
 		return instance

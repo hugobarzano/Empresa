@@ -49,25 +49,15 @@ def Empresa_detalle(request, pk):
 	if request.method == 'GET':
 	        serializador = EmpresaSerializer(empresa)
 		return JSONResponse(serializador.data)
-	elif request.method == 'PUT':
+	elif request.method == 'POST':
+		#elif request.method == 'PUT':
 		data = JSONParser().parse(request)
 		serializador = EmpresaSerializer(empresa, data=data)
+		#serializador = Empresa.update(empresa, data=data)
 		if serializador.is_valid():
 			serializador.save()
-			return JSONResponse(serializador.data)
+			return JSONResponse(serializador.data,status=202)
 		return JSONResponse(serializador.errors, status=400)
 	elif request.method == 'DELETE':
 		empresa.delete()
 		return HttpResponse(status=204)
-
-
-
-
-
-
-
-
-
-
-
-

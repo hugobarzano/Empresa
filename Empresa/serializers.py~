@@ -14,9 +14,11 @@ class EmpresaSerializer(serializers.Serializer):
 
 	def update(self, instance, validated_data):
 	        """
-	        Actualiza y devuelve una isntancia de Empresa, teniendo en cuenta los datos validados
+	        Actualiza y devuelve una instancia de Empresa, teniendo en cuenta los datos validados
 	        """
-		instance.nombre = validated_data.get('nombre', instance.nombre)
-		instance.correo = validated_data.get('correo', instance.correo)
+		#instance.nombre = validated_data.get('nombre', instance.nombre)
+		#instance.correo = validated_data.get('correo', instance.correo)
+		instance.nombre = validated_data.get('nombre:')
+		instance.correo = validated_data.get('correo:')
 		instance.save()
 		return instance

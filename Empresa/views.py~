@@ -38,9 +38,9 @@ def Empresa_lista(request):
 
 @csrf_exempt
 def Empresa_detalle(request, pk):
-    """
-    Recuperar, actualizar o borrar una empresa
-    """
+	"""
+	Recuperar, actualizar o borrar una empresa
+	"""
 	try:
 		empresa = Empresa.objects.get(pk=pk)
 	except Empresa.DoesNotExist:
@@ -52,9 +52,10 @@ def Empresa_detalle(request, pk):
 	elif request.method == 'PUT':
 		data = JSONParser().parse(request)
 		serializador = EmpresaSerializer(empresa, data=data)
+		#serializador = Empresa.update(empresa, data=data)
 		if serializador.is_valid():
 			serializador.save()
-			return JSONResponse(serializador.data)
+			return JSONResponse(serializador.data,status=202)
 		return JSONResponse(serializador.errors, status=400)
 	elif request.method == 'DELETE':
 		empresa.delete()

@@ -1,6 +1,7 @@
 from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APITestCase
+from django.test.client import RequestFactory
 
 # Create your tests here.
 
@@ -49,19 +50,24 @@ class RutasTests(APITestCase):
 		print("Varias Empresas consultadas en detalle correctamente")
 
 	def test_crea_empresa(self):
-		#response=self.client.post('/Empresas/',data={'nombre' : 'empresa_post', 'correo' : 'correo_post'})
-		#self.assertEqual(response.status_code, 201)
-		print("Empresa Creada correctamente")
+		data={'nombre' : 'empresa_post', 'correo' : 'correo_post'}
+		response=self.client.post('/Empresas/',data, format='json')
+		self.assertEqual(response.status_code, 201)
+		self.assertEqual(Empresa.objects.get().nombre,'empresa_post')
+		print("REST: Empresa Creada correctamente")
 
 	def test_actualiza_empresa(self):
 		emp = Empresa(nombre='empresa1',correo='correo1')
 		emp.save()
-        	emp2 = Empresa.objects.get(pk='empresa1')
-		#self.assertEqual(emp2.nombre,'empresa1')
-
-		#resp = self.client.post(reverse('Empresas', kwargs={'nombre': 'empresa1'}), {'correo': 'correo_actualizado'})
-		#self.assertEqual(resp.response.content, )
-
+		data={"nombre" : "empresa_update", "correo" : "correo_update"}
+		factory = RequestFactory()
+		response = self.client.get('/Empresa/1/')
+		print response.content
+		response=self.client.put('/Empresa/1/',emp,data)
+		#response=self.client.get('/Empresa/1/')
+		#print response.content
+		#self.assertEqual(response.status_code, 400)
+        	print("REST: Empresa actualizada correctamente")
 
 
 
