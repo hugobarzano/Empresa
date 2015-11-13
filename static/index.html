@@ -1,0 +1,12 @@
+<h1><strong>LISTADO DE EMPRESAS VALORADAS</strong></h1>
+{% if lista_ultimas_empresas %}
+	<ul>
+	{% for empresa in lista_ultimas_empresas %}
+		<li><a href="/empresa/{{ empresa.id }}/">{{ empresa.nombre }}</a></li>
+	{% endfor %}
+	</ul>
+{% else %}
+    <p>No hay empresas.</p>
+{% endif %}
+
+<a href="/empresa/add_empresa/"><strong>Añadir Empresa</strong></a><br />

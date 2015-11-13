@@ -1,11 +1,43 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from Empresa.models import Empresa
+from Empresa.forms import EmpresaForm
 from Empresa.serializers import EmpresaSerializer
 # Create your views here.
+def index (request):
+	"""Vista de la pagina principal de la aplicacion.
+		En ella se listan las empresas que hay registradas
+		Tambien da la opcion de registrar una nueva empresa
+	"""
+	lista_ultimas_empresas = Empresa.objects.all()
+	context = {'lista_ultimas_empresas': lista_ultimas_empresas}
+	return render(request, 'empresa/index.html', context)
+
+def add_empresa(request):
+	"""Vista de la funcionalidad de add_empresa.
+
+		Recibiendo un objeto del tipo request, analiza si se trata de datos enviados mediante un formulario.
+		Comprueba que dicho formulario es valido en relacion al modelo y en caso de ser valido, alamacena en
+		la base de datos la nueva empresa, devolviendo el flujo al index de la aplicacion.
+
+		En caso de que el formulario no sea valido o se procese con errores, se informa de lo que esta pasando.
+	"""
+	if request.method == 'POST':
+		form = EmpresaForm(request.POST)
+		if form.is_valid():
+			form.save(commit=True)
+			return index(request)
+		else:
+			print form.errors
+	else:
+		form = EmpresaForm()
+	return render(request, 'empresa/add_empresa.html', {'form': form})
+
+
+
 
 
 class JSONResponse(HttpResponse):
